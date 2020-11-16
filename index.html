@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<input type="text" id="number_min" placeholder="min">
+<input type="text" id="number_max" placeholder="max" onchange="numberGenerate()">
+<input type="text" id="number_guess" placeholder="guess" onchange="guessNumber()"><br>
+<button type="button" onclick="fibonacci()">Run Fibonacci!</button>
+<p id="output"></p>
+<script>
+    /*print 20 first fibonacci number*/
+    /*first fibonacci number % 5 == 0*/
+    function fibonacci()
+    {
+        let fibonacciAmount=2;
+        let fibonacciSum=1;
+        let a=0,b=1;
+        document.write(a+' '+b+' ')
+        while(fibonacciAmount<20)
+        {
+            b=a+b;
+            a=b-a;
+            document.write(b+' ');
+            fibonacciSum+=b;
+            fibonacciAmount+=1;
+        }
+        document.write('<br>'+fibonacciAmount+'<br>')
+        document.write('Sum 20 first fibonacci number : '+fibonacciSum+'<br>');
+    }
+
+    /*Game guess the number*/
+    let randomNumber;
+    let guessFail=0;
+
+    function numberGenerate()
+    {
+        let min=+document.getElementById('number_min').value;
+        let max=+document.getElementById('number_max').value;
+        randomNumber=Math.floor(Math.random()*(max-min))+min+1;
+    }
+
+    function guessNumber()
+    {
+        console.log(randomNumber);
+        let numberGuess=+document.getElementById('number_guess').value;
+        if(numberGuess == randomNumber)
+        {
+            document.getElementById('output').innerHTML='You Win !!!';
+            return 0;
+        }
+        else
+        {
+            guessFail+=1;
+            if(guessFail>2)
+            {
+                document.getElementById('output').innerHTML='Failed Over 3 times, You lose !!!';
+                return;
+            }
+            if(numberGuess>randomNumber)
+            {
+                document.getElementById('output').innerHTML='Lower!!!';
+            }
+            else
+            {
+                document.getElementById('output').innerHTML='Higher!!!';
+            }
+        }
+    }
+</script>
+</body>
+</html>
